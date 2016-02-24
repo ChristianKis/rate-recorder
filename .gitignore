@@ -6,4 +6,4 @@ Release/
 *.suo
 packages/
 .vs/
-
+*.user
