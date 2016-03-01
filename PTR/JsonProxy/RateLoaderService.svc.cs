@@ -11,31 +11,21 @@ namespace JsonProxy
     {
         public string GetCurrentRates()
         {
-            var client = new MNBArfolyamServiceSoapClient();
-            var result = client.GetCurrentExchangeRates(new MNBRateServiceReference.GetCurrentExchangeRatesRequestBody());
-
-            var serializer = new XmlSerializer(typeof(JsonProxy.Contracts.MNBCurrentExchangeRates));
-
-
-
-            using (TextReader reader = new StringReader(result.GetCurrentExchangeRatesResult))
+            using (var client = new MNBArfolyamServiceSoapClient())
             {
-                var xml = serializer.Deserialize(reader);
+                var result = client.GetCurrentExchangeRates(new GetCurrentExchangeRatesRequestBody());
 
-                var json = new JavaScriptSerializer().Serialize(xml);
+                var serializer = new XmlSerializer(typeof(Contracts.MNBCurrentExchangeRates));
 
-                return json;
+                using (TextReader reader = new StringReader(result.GetCurrentExchangeRatesResult))
+                {
+                    var xml = serializer.Deserialize(reader);
 
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(reader.ToString());
-                string jsonText = JsonConvert.SerializeXmlNode(doc);
-                return jsonText;
+                    var json = new JavaScriptSerializer().Serialize(xml);
 
-
-
+                    return json;
+                }
             }
-
-            return result.GetCurrentExchangeRatesResult;
         }
     }
 }
