@@ -131,6 +131,7 @@
     </Compile>
     <Compile Include="IRateLoaderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Converter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

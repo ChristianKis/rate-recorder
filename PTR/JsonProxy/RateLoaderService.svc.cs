@@ -1,12 +1,8 @@
-﻿using JsonProxy.MNBRateServiceReference;
-using Newtonsoft.Json;
-using System.IO;
-using System.Web.Script.Serialization;
-using System.Xml;
-using System.Xml.Serialization;
-
-namespace JsonProxy
+﻿namespace JsonProxy
 {
+    using JsonProxy.Contracts;
+    using JsonProxy.MNBRateServiceReference;
+    using Utilities;
     public class RateLoaderService : IRateLoaderService
     {
         public string GetCurrentRates()
@@ -15,16 +11,11 @@ namespace JsonProxy
             {
                 var result = client.GetCurrentExchangeRates(new GetCurrentExchangeRatesRequestBody());
 
-                var serializer = new XmlSerializer(typeof(Contracts.MNBCurrentExchangeRates));
+                var converter = new Converter<MNBCurrentExchangeRates>();
 
-                using (TextReader reader = new StringReader(result.GetCurrentExchangeRatesResult))
-                {
-                    var xml = serializer.Deserialize(reader);
+                var subject = converter.Deserialize(result.GetCurrentExchangeRatesResult);
 
-                    var json = new JavaScriptSerializer().Serialize(xml);
-
-                    return json;
-                }
+                return converter.Serialize(subject);
             }
         }
     }
