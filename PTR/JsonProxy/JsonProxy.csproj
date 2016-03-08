@@ -72,6 +72,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Default.pubxml" />
     <None Include="Service References\MNBRateServiceReference\configuration91.svcinfo" />
     <None Include="Service References\MNBRateServiceReference\configuration.svcinfo" />
     <Content Include="Service References\MNBRateServiceReference\JsonProxy.MNBRateServiceReference.GetCurrenciesResponse.datasource">
@@ -139,6 +140,9 @@
   <ItemGroup>
     <None Include="Service References\MNBRateServiceReference\MNBArfolyamServiceSoapImpl.wsdl" />
     <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Default.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
